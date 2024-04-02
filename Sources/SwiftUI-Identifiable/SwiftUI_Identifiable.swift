@@ -1,6 +1,14 @@
-public struct SwiftUI_Identifiable {
-    public private(set) var text = "Hello, World!"
+//public struct SwiftUI_Identifiable {}
 
-    public init() {
+extension Array {
+    struct IdentifiableArray<T>: Identifiable {
+        let id: Int
+        let value: T
+    }
+
+    var identifiable: [IdentifiableArray<Element>] {
+        enumerated().map {
+            .init(id: $0, value: $1)
+        }
     }
 }
