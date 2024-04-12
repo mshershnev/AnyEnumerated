@@ -57,6 +57,8 @@ extension Array {
 ## Example
 
 ```swift
+import SwiftUI_Identifiable
+
 var body: some View {
     List {
         Section("credentials") {
