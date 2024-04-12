@@ -1,4 +1,4 @@
-# SwiftUI ForEach Identifiable 
+# AnyEnumerated
 
 ## Problem
 
@@ -42,13 +42,13 @@ Referencing initializer 'init(_:content:)' on 'ForEach' requires that 'User' con
 ## Solution
 
 ```swift
-extension Array {
-    struct EnumeratedArray<T>: Identifiable {
-        let id: Int
-        let value: T
-    }
+public struct AnyEnumerated<T>: Identifiable {
+    public let id: Int
+    public let value: T
+}
 
-    var identifiable: [EnumeratedArray<Element>] {
+extension Array {
+    public var identifiable: [AnyEnumerated<Element>] {
         enumerated().map { .init(id: $0, value: $1) }
     }
 }
@@ -57,7 +57,7 @@ extension Array {
 ## Example
 
 ```swift
-import SwiftUI_Identifiable
+import AnyEnumerated
 
 var body: some View {
     List {
@@ -93,4 +93,4 @@ dependencies: [
 
 ## License
 
-`SwiftUI-Identifiable` is available under the MIT license. See the [LICENSE](LICENSE) file for more info.
+`AnyEnumerated` is available under the MIT license. See the [LICENSE](LICENSE) file for more info.
