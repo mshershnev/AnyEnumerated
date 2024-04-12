@@ -1,10 +1,10 @@
 extension Array {
-    public struct EnumeratedArray<T>: Identifiable {
+    public struct AnyEnumerated<T>: Identifiable {
         public let id: Int
         public let value: T
     }
 
-    public var identifiable: [EnumeratedArray<Element>] {
+    public var identifiable: [AnyEnumerated<Element>] {
         enumerated().map { .init(id: $0, value: $1) }
     }
 }
