@@ -42,6 +42,21 @@ Referencing initializer 'init(_:content:)' on 'ForEach' requires that 'User' con
 ## Solution
 
 ```swift
+extension Array {
+    struct EnumeratedArray<T>: Identifiable {
+        let id: Int
+        let value: T
+    }
+
+    var identifiable: [EnumeratedArray<Element>] {
+        enumerated().map { .init(id: $0, value: $1) }
+    }
+}
+```
+
+## Example
+
+```swift
 var body: some View {
     List {
         Section("credentials") {
