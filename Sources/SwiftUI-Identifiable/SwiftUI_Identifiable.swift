@@ -1,7 +1,7 @@
 extension Array {
     struct EnumeratedArray<T>: Identifiable {
-        let id: Int
-        let value: T
+        public let id: Int
+        public let value: T
     }
 
     var identifiable: [EnumeratedArray<Element>] {
