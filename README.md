@@ -5,35 +5,6 @@
 How often has this situation happened to you?
 
 ![ForEach requires that User conform to Identifiable](Misc/Identifiable.png)
-
-```swift
-struct User {
-    let login: String
-    let password: String
-}
-
-let users: [User] = [
-    .init(login: "root", password: "fh6Cf&Tt"),
-    .init(login: "admin", password: "4SB&FNYc"),
-    .init(login: "guest", password: "tvsa4Lg,"),
-    .init(login: "info", password: "Mk-dAd8D"),
-]
-
-var body: some View {
-    List {
-        Section("credentials") {
-            ForEach(users) { user in
-                HStack {
-                    Text(user.login)
-                    Divider()
-                    Text(user.password)
-                }
-                .monospaced()
-            }
-        }
-    }
-}
-```
     
 ```swift
 Referencing initializer 'init(_:content:)' on 'ForEach' requires that 'User' conform to 'Identifiable'
