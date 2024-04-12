@@ -1,84 +1,67 @@
 # SwiftUI: ForEach-Identifiable
 
-NSRegularExpression wrapper.
+Array Identifiable Conformance 
 
-## Usage
+## Problem
 
-Replace:
+![ForEach requires that User conform to Identifiable](Misc/Identifiable.png)
+
+How often has this situation happened to you?
 
 ```swift
-var string = "Check out the new iPhone 15"
-
-guard
-    let regex = try? SwiftyREX(#"\d+"#),
-    let match = regex.matches(in: string).first
-else {
-    return
+struct User {
+    let login: String
+    let password: String
 }
 
-string.replaceSubrange(match.range, with: "16")
-print(string)
-
-// Output: 
-// Check out the new iPhone 16
-```
-
-Capturing:
-
-```swift
-let string = """
-[
-    {username: "root", password: "fh6Cf&Tt"},
-    {username: "admin", password: "4SB&FNYc"},
-    {username: "guest", password: "tvsa4Lg,"},
-    {username: "info", password: "Mk-dAd8D"},
+let users: [User] = [
+    .init(login: "root", password: "fh6Cf&Tt"),
+    .init(login: "admin", password: "4SB&FNYc"),
+    .init(login: "guest", password: "tvsa4Lg,"),
+    .init(login: "info", password: "Mk-dAd8D"),
 ]
-"""
 
-guard
-    let regex = try? SwiftyREX(#"username: "([^"]+)", password: "([^"]+)""#)
-else {
-    return
-}
-
-regex.matches(in: string).forEach {
-    guard
-        let username = $0.captures[safe: 0]?.value,
-        let password = $0.captures[safe: 1]?.value
-    else { 
-        return 
+var body: some View {
+    List {
+        Section("credentials") {
+            ForEach(users) { user in
+                HStack {
+                    Text(user.login)
+                    Divider()
+                    Text(user.password)
+                }
+                .monospaced()
+            }
+        }
     }
-
-    print("\(username): \(password)")
 }
-
-// Output: 
-// root: fh6Cf&Tt
-// admin: 4SB&FNYc
-// guest: tvsa4Lg,
-// info: Mk-dAd8D
+```
+    
+```swift
+Referencing initializer 'init(_:content:)' on 'ForEach' requires that 'User' conform to 'Identifiable'
 ```
 
-Switch statement:
+## Solution
 
 ```swift
-let string = "m1k3@github.com"
+var body: some View {
+    List {
+        Section("credentials") {
+            ForEach(users.identifiable) { item in
+                let user = item.value
 
-guard
-    let email = try? SwiftyREX(#"^\w+@\w+.\w+$"#)
-else {
-    return
+                HStack {
+                    Text("#\(item.id)")
+                    Divider()
+                    Text(user.login)
+                    Divider()
+                    Text(user.password)
+                }
+                .monospaced()
+            }
+        }
+    }
 }
-
-switch string {
-    case email: 
-        print("Looks like an email")
-    default: 
-        print("Looks like NOT an email")
-}
-
-// Output: 
-// Looks like an email
 ```
 
 ## Installation
@@ -89,44 +72,10 @@ Add a dependency to your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/mshershnev/SwiftyREX")
+    .package(url: "https://github.com/mshershnev/SwiftUI-Identifiable")
 ]
 ```
 
 ## License
 
-Regex is available under the MIT license. See the [LICENSE](LICENSE) file for more info.
-
-
-
-
-
-
-
-
-
-A description of this package.
-
-    private let users: [User] = [
-        .init(login: "root", password: "fh6Cf&Tt"),
-        .init(login: "admin", password: "4SB&FNYc"),
-        .init(login: "guest", password: "tvsa4Lg,"),
-        .init(login: "info", password: "Mk-dAd8D"),
-    ]
-
-    var body: some View {
-        List {
-            Section("credentials") {
-                ForEach(users.identifiable) { item in
-                    HStack {
-                        Text("#\(item.id)")
-                        Divider()
-                        Text(item.value.login)
-                        Divider()
-                        Text(item.value.password)
-                    }
-                    .monospaced()
-                }
-            }
-        }
-    }
+`SwiftUI-Identifiable` is available under the MIT license. See the [LICENSE](LICENSE) file for more info.
