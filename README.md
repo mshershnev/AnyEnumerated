@@ -1,6 +1,4 @@
-# SwiftUI: ForEach-Identifiable
-
-Array Identifiable Conformance 
+# SwiftUI ForEach Identifiable 
 
 ## Problem
 
