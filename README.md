@@ -2,9 +2,9 @@
 
 ## Problem
 
-![ForEach requires that User conform to Identifiable](Misc/Identifiable.png)
-
 How often has this situation happened to you?
+
+![ForEach requires that User conform to Identifiable](Misc/Identifiable.png)
 
 ```swift
 struct User {
