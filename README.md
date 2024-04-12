@@ -87,7 +87,7 @@ Add a dependency to your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/mshershnev/SwiftUI-Identifiable")
+    .package(url: "https://github.com/mshershnev/AnyIdentifiable")
 ]
 ```
 
