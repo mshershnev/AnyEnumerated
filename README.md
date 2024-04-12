@@ -1,4 +1,4 @@
-# AnyEnumerated
+# AnyIdentifiable
 
 ## Problem
 
@@ -42,13 +42,13 @@ Referencing initializer 'init(_:content:)' on 'ForEach' requires that 'User' con
 ## Solution
 
 ```swift
-public struct AnyEnumerated<T>: Identifiable {
+public struct AnyIdentifiable<T>: Identifiable {
     public let id: Int
     public let value: T
 }
 
 extension Array {
-    public var identifiable: [AnyEnumerated<Element>] {
+    public var identifiable: [AnyIdentifiable<Element>] {
         enumerated().map { .init(id: $0, value: $1) }
     }
 }
@@ -57,7 +57,7 @@ extension Array {
 ## Example
 
 ```swift
-import AnyEnumerated
+import AnyIdentifiable
 
 var body: some View {
     List {
@@ -93,4 +93,4 @@ dependencies: [
 
 ## License
 
-`AnyEnumerated` is available under the MIT license. See the [LICENSE](LICENSE) file for more info.
+`AnyIdentifiable` is available under the MIT license. See the [LICENSE](LICENSE) file for more info.
